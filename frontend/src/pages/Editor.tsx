@@ -58,14 +58,14 @@ const Editor = () => {
             <div className="flex items-center space-x-4">
               <Link to="/dashboard" className="flex items-center text-gray-600 hover:text-purple-600">
                 <ArrowLeft className="w-5 h-5 mr-2" />
-                Back to Dashboard
+                Back
               </Link>
               <Separator orientation="vertical" className="h-6" />
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-black to-blue-600 rounded-lg flex items-center justify-center">
                   <Video className="w-5 h-5 text-white" />
                 </div>
-                <span className="font-semibold">Video Editor</span>
+                <span className="font-bold">Generate</span>
               </div>
             </div>
             
