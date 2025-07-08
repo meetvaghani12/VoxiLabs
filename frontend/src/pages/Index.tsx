@@ -1,33 +1,41 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Play, Zap, Globe, Mic, Video, Users, Star } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Navigation } from "@/components/Navigation";
+import { useEffect, useState } from "react";
+import authService from "@/services/auth";
 
 const Index = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const user = await authService.getCurrentUser();
+        setIsAuthenticated(!!user);
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  const handleGetStarted = () => {
+    if (isAuthenticated) {
+      navigate('/editor');
+    } else {
+      navigate('/signup');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
       {/* Navigation */}
-      <nav className="flex items-center justify-between p-6 max-w-7xl mx-auto">
-        <div className="flex items-center space-x-2">
-          
-        <span className="text-xl font-bold text-black">
-            VOXILABS
-        </span>
-
-        </div>
-        <div className="flex items-center space-x-4">
-          <Link to="/login">
-            <Button variant="ghost">Login</Button>
-          </Link>
-          <Link to="/signup">
-            <Button >
-              Get Started Free
-            </Button>
-          </Link>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-20 text-center">
@@ -42,18 +50,13 @@ const Index = () => {
           and animated characters. No video editing skills required.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button size="lg" className=" text-lg px-8 py-6">
-            Start Creating Free
-          
+          <Button size="lg" className="text-lg px-8 py-6" onClick={handleGetStarted}>
+            {isAuthenticated ? 'Start Creating' : 'Start Creating Free'}
           </Button>
           <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-2">
-
             Watch Demo
           </Button>
         </div>
-
-   
-        
       </section>
 
       {/* Features Section */}
