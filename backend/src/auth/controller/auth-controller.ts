@@ -102,24 +102,6 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Check if email is verified
-    if (!user.emailVerified) {
-      // Generate new verification token
-      const verificationToken = crypto.randomBytes(32).toString('hex');
-      await createVerificationToken({
-        identifier: email,
-        token: verificationToken,
-        expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
-      });
-      
-      await sendVerificationEmail(email, verificationToken, user.firstName);
-      
-      res.status(400).json({ 
-        message: 'Email not verified. A new verification link has been sent to your email.' 
-      });
-      return;
-    }
-
     // Verify password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
@@ -127,21 +109,23 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Generate 2FA OTP if enabled
-    if (user.twoFactorSecret) {
+    // Check if email is verified
+    if (!user.emailVerified) {
+      // Generate and store OTP
       const otp = await generateOTP(email);
       await storeOTP(email, otp);
-      await sendVerificationEmail(email, otp, user.firstName, true);
-
-      res.status(200).json({
-        message: 'OTP sent to your email for 2FA verification',
-        userId: user.id,
-        requiresOTP: true,
+      
+      // Send verification email with OTP
+      await sendVerificationEmail(email, otp, user.firstName);
+      
+      res.status(400).json({ 
+        message: 'Email not verified. A verification code has been sent to your email.',
+        email: email
       });
       return;
     }
 
-    // If 2FA is not enabled, create session and return token
+    // Create session and return token
     const token = generateToken({
       id: user.id,
       email: user.email,
