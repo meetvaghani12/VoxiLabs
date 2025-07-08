@@ -63,15 +63,15 @@ const Dashboard = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed": return "bg-green-100 text-green-700";
-      case "processing": return "bg-yellow-100 text-yellow-700";
-      case "draft": return "bg-gray-100 text-gray-700";
-      default: return "bg-gray-100 text-gray-700";
+      case "completed": return "bg-black text-white";
+      case "processing": return "bg-black/10 text-black";
+      case "draft": return "bg-black/5 text-black";
+      default: return "bg-black/5 text-black";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -98,7 +98,7 @@ const Dashboard = () => {
                   Settings
                 </Button>
               </Link>
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
                 <User className="w-4 h-4 text-white" />
               </div>
             </div>
@@ -109,8 +109,8 @@ const Dashboard = () => {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back!</h1>
-          <p className="text-gray-600">Create amazing AI videos in minutes</p>
+          <h1 className="text-3xl font-bold text-black mb-2">Welcome back!</h1>
+          <p className="text-black/60">Create amazing AI videos in minutes</p>
         </div>
 
         {/* Quick Stats */}
@@ -119,10 +119,10 @@ const Dashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Total Videos</p>
-                  <p className="text-2xl font-bold">12</p>
+                  <p className="text-sm text-black/60">Total Videos</p>
+                  <p className="text-2xl font-bold text-black">12</p>
                 </div>
-                <Video className="w-8 h-8 text-purple-600" />
+                <Video className="w-8 h-8 text-black" />
               </div>
             </CardContent>
           </Card>
@@ -131,10 +131,10 @@ const Dashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">This Month</p>
-                  <p className="text-2xl font-bold">5</p>
+                  <p className="text-sm text-black/60">This Month</p>
+                  <p className="text-2xl font-bold text-black">5</p>
                 </div>
-                <Calendar className="w-8 h-8 text-blue-600" />
+                <Calendar className="w-8 h-8 text-black" />
               </div>
             </CardContent>
           </Card>
@@ -143,20 +143,20 @@ const Dashboard = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Total Duration</p>
-                  <p className="text-2xl font-bold">28m</p>
+                  <p className="text-sm text-black/60">Total Duration</p>
+                  <p className="text-2xl font-bold text-black">28m</p>
                 </div>
-                <Clock className="w-8 h-8 text-green-600" />
+                <Clock className="w-8 h-8 text-black" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-sm bg-gradient-to-r from-purple-500 to-blue-500">
+          <Card className="border-0 shadow-sm bg-black">
             <CardContent className="p-6">
               <Link to="/editor" className="block">
                 <div className="flex items-center justify-between text-white">
                   <div>
-                    <p className="text-sm text-purple-100">New Project</p>
+                    <p className="text-sm text-white/60">New Project</p>
                     <p className="text-lg font-semibold">Create Video</p>
                   </div>
                   <Plus className="w-8 h-8" />
@@ -169,10 +169,10 @@ const Dashboard = () => {
         {/* Projects Section */}
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <h2 className="text-2xl font-bold">Your Projects</h2>
+            <h2 className="text-2xl font-bold text-black">Your Projects</h2>
             <div className="flex items-center space-x-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-black/40" />
                 <Input
                   placeholder="Search projects..."
                   value={searchTerm}
@@ -183,7 +183,7 @@ const Dashboard = () => {
               <select 
                 value={sortBy} 
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-3 py-2 border rounded-md text-sm"
+                className="px-3 py-2 border rounded-md text-sm text-black bg-white"
               >
                 <option value="date">Sort by Date</option>
                 <option value="title">Sort by Title</option>
@@ -196,19 +196,19 @@ const Dashboard = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <Card key={project.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <div className="aspect-video bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
-                  <Play className="w-12 h-12 text-purple-600" />
+                <div className="aspect-video bg-black/5 flex items-center justify-center">
+                  <Play className="w-12 h-12 text-black" />
                 </div>
                 
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-3">
-                    <h3 className="font-semibold text-lg truncate">{project.title}</h3>
+                    <h3 className="font-semibold text-lg truncate text-black">{project.title}</h3>
                     <Badge className={getStatusColor(project.status)}>
                       {project.status}
                     </Badge>
                   </div>
                   
-                  <div className="flex items-center text-sm text-gray-500 mb-4">
+                  <div className="flex items-center text-sm text-black/60 mb-4">
                     <Clock className="w-4 h-4 mr-1" />
                     {project.duration}
                     <span className="mx-2">•</span>
@@ -230,7 +230,7 @@ const Dashboard = () => {
                       <Button size="sm" variant="ghost">
                         <Share className="w-4 h-4" />
                       </Button>
-                      <Button size="sm" variant="ghost" className="text-red-600 hover:text-red-700">
+                      <Button size="sm" variant="ghost">
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
@@ -242,14 +242,14 @@ const Dashboard = () => {
 
           {/* Empty State */}
           {projects.length === 0 && (
-            <Card className="border-2 border-dashed border-gray-300 p-12 text-center">
-              <Video className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-600 mb-2">No projects yet</h3>
-              <p className="text-gray-500 mb-6">Create your first AI video to get started</p>
+            <Card className="border-2 border-dashed border-black/20 p-12 text-center">
+              <Video className="w-16 h-16 text-black/40 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-black mb-2">No projects yet</h3>
+              <p className="text-black/60 mb-6">Create your first AI video to get started</p>
               <Link to="/editor">
-                <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                <Button>
                   <Plus className="w-4 h-4 mr-2" />
-                  Create Your First Video
+                  Create New Video
                 </Button>
               </Link>
             </Card>

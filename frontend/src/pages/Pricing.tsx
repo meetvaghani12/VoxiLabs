@@ -78,13 +78,13 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-6 h-6 bg-gradient-to-r from-black to-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-6 h-6 bg-black rounded-lg flex items-center justify-center">
                 <IndianRupeeIcon className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold text-black">
@@ -107,22 +107,22 @@ const Pricing = () => {
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-black mb-4">
             Choose Your Plan
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-xl text-black/60 mb-8">
             Start free, upgrade as you grow
           </p>
           
           {/* Billing Toggle */}
           <div className="flex items-center justify-center space-x-4 mb-8">
-            <span className={`text-sm ${!isAnnual ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
+            <span className={`text-sm ${!isAnnual ? 'text-black font-medium' : 'text-black/60'}`}>
               Monthly
             </span>
             <button
               onClick={() => setIsAnnual(!isAnnual)}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                isAnnual ? 'bg-purple-600' : 'bg-gray-300'
+                isAnnual ? 'bg-black' : 'bg-black/20'
               }`}
             >
               <span
@@ -131,11 +131,11 @@ const Pricing = () => {
                 }`}
               />
             </button>
-            <span className={`text-sm ${isAnnual ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
+            <span className={`text-sm ${isAnnual ? 'text-black font-medium' : 'text-black/60'}`}>
               Annual
             </span>
             {isAnnual && (
-              <Badge className="bg-green-100 text-green-700">
+              <Badge className="bg-black text-white">
                 Save 20%
               </Badge>
             )}
@@ -150,26 +150,26 @@ const Pricing = () => {
             
             return (
               <Card key={plan.name} className={`relative border-0 shadow-lg ${
-                plan.popular ? 'ring-2 ring-purple-600 transform scale-105' : ''
+                plan.popular ? 'ring-2 ring-black transform scale-105' : ''
               }`}>
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-purple-600 text-white px-4 py-1">
+                    <Badge className="bg-black text-white px-4 py-1">
                       Most Popular
                     </Badge>
                   </div>
                 )}
                 
                 <CardHeader className="text-center pb-4">
-                  <div className="mx-auto w-12 h-12 bg-gradient-to-r from-purple-100 to-blue-100 rounded-full flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-purple-600" />
+                  <div className="mx-auto w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-black" />
                   </div>
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                  <CardTitle className="text-2xl text-black">{plan.name}</CardTitle>
                   <CardDescription>{plan.description}</CardDescription>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">${price}</span>
+                    <span className="text-4xl font-bold text-black">${price}</span>
                     {price > 0 && (
-                      <span className="text-gray-500">
+                      <span className="text-black/60">
                         /{isAnnual ? 'year' : 'month'}
                       </span>
                     )}
@@ -180,24 +180,20 @@ const Pricing = () => {
                   <ul className="space-y-3">
                     {plan.features.map((feature, index) => (
                       <li key={index} className="flex items-center">
-                        <Check className="w-4 h-4 text-green-600 mr-3 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                        <Check className="w-4 h-4 text-black mr-3 flex-shrink-0" />
+                        <span className="text-sm text-black">{feature}</span>
                       </li>
                     ))}
                     {plan.limitations.map((limitation, index) => (
-                      <li key={index} className="flex items-center text-gray-500">
-                        <X className="w-4 h-4 text-gray-400 mr-3 flex-shrink-0" />
+                      <li key={index} className="flex items-center text-black/60">
+                        <X className="w-4 h-4 text-black/40 mr-3 flex-shrink-0" />
                         <span className="text-sm">{limitation}</span>
                       </li>
                     ))}
                   </ul>
                   
                   <Button 
-                    className={`w-full ${
-                      plan.popular 
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700' 
-                        : ''
-                    }`}
+                    className="w-full"
                     variant={plan.popular ? 'default' : 'outline'}
                   >
                     {plan.cta}
@@ -210,11 +206,11 @@ const Pricing = () => {
 
         {/* FAQ Section */}
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-black mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-gray-600 mb-8">
-            Need help choosing the right plan? <Link to="/contact" className="text-purple-600 hover:underline">Contact us</Link>
+          <p className="text-black/60 mb-8">
+            Need help choosing the right plan? <Link to="/contact" className="text-black hover:text-black/80">Contact us</Link>
           </p>
         </div>
       </div>

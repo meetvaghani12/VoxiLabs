@@ -16,10 +16,10 @@ import { Link } from "react-router-dom";
 
 const Analytics = () => {
   const stats = [
-    { label: "Total Videos", value: "127", change: "+12%", icon: Video, color: "text-blue-600" },
-    { label: "Generation Time", value: "45.2m", change: "-8%", icon: Clock, color: "text-green-600" },
-    { label: "Words Used", value: "8,547", change: "+23%", icon: FileText, color: "text-purple-600" },
-    { label: "Storage Used", value: "2.3 GB", change: "+15%", icon: HardDrive, color: "text-orange-600" }
+    { label: "Total Videos", value: "127", change: "+12%", icon: Video },
+    { label: "Generation Time", value: "45.2m", change: "-8%", icon: Clock },
+    { label: "Words Used", value: "8,547", change: "+23%", icon: FileText },
+    { label: "Storage Used", value: "2.3 GB", change: "+15%", icon: HardDrive }
   ];
 
   const topVideos = [
@@ -40,16 +40,15 @@ const Analytics = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-gradient-to-r from-black to-blue-600 rounded-lg flex items-center justify-center">
-              <BarChart3 className="w-5 h-5 text-white" />
-            </div>
-
+              <div className="w-6 h-6 bg-black rounded-lg flex items-center justify-center">
+                <BarChart3 className="w-5 h-5 text-white" />
+              </div>
               <span className="text-xl font-bold text-black">
                 VOXILABS
               </span>
@@ -57,7 +56,7 @@ const Analytics = () => {
             
             <div className="flex items-center space-x-4">
               <Link to="/dashboard">
-                <button className="px-4 py-2 text-gray-600 hover:text-gray-900">Dashboard</button>
+                <button className="px-4 py-2 text-black hover:text-black/80">Dashboard</button>
               </Link>
             </div>
           </div>
@@ -67,8 +66,8 @@ const Analytics = () => {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Analytics Dashboard</h1>
-          <p className="text-gray-600">Track your video performance and usage statistics</p>
+          <h1 className="text-3xl font-bold text-black mb-2">Analytics Dashboard</h1>
+          <p className="text-black/60">Track your video performance and usage statistics</p>
         </div>
 
         {/* Stats Cards */}
@@ -81,13 +80,13 @@ const Analytics = () => {
               <Card key={index} className="border-0 shadow-sm">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <Icon className={`w-6 h-6 ${stat.color}`} />
+                    <Icon className="w-6 h-6 text-black" />
                     <Badge variant={isPositive ? "default" : "secondary"} className="text-xs">
                       {stat.change}
                     </Badge>
                   </div>
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                  <p className="text-sm text-gray-600">{stat.label}</p>
+                  <p className="text-2xl font-bold text-black">{stat.value}</p>
+                  <p className="text-sm text-black/60">{stat.label}</p>
                 </CardContent>
               </Card>
             );
@@ -113,16 +112,16 @@ const Analytics = () => {
                       <span className="text-sm font-medium w-12">{data.month}</span>
                       <div className="flex-1 mx-4">
                         <div className="flex items-center space-x-2">
-                          <div className="flex-1 bg-gray-200 rounded-full h-2">
+                          <div className="flex-1 bg-black/10 rounded-full h-2">
                             <div 
-                              className="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full" 
+                              className="bg-black h-2 rounded-full" 
                               style={{ width: `${(data.videos / 25) * 100}%` }}
                             />
                           </div>
-                          <span className="text-sm text-gray-600 w-16">{data.videos} videos</span>
+                          <span className="text-sm text-black/60 w-16">{data.videos} videos</span>
                         </div>
                       </div>
-                      <span className="text-sm text-gray-500 w-20">{data.words} words</span>
+                      <span className="text-sm text-black/60 w-20">{data.words} words</span>
                     </div>
                   ))}
                 </div>
@@ -138,31 +137,31 @@ const Analytics = () => {
               <CardContent className="space-y-6">
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">Words Used</span>
-                    <span className="text-sm text-gray-600">8,547 / 10,000</span>
+                    <span className="text-sm font-medium text-black">Words Used</span>
+                    <span className="text-sm text-black/60">8,547 / 10,000</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full" style={{ width: '85%' }} />
-                  </div>
-                </div>
-                
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">Storage Used</span>
-                    <span className="text-sm text-gray-600">2.3 GB / 5 GB</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full" style={{ width: '46%' }} />
+                  <div className="w-full bg-black/10 rounded-full h-2">
+                    <div className="bg-black h-2 rounded-full" style={{ width: '85%' }} />
                   </div>
                 </div>
                 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">Videos This Month</span>
-                    <span className="text-sm text-gray-600">25 / 50</span>
+                    <span className="text-sm font-medium text-black">Storage Used</span>
+                    <span className="text-sm text-black/60">2.3 GB / 5 GB</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-orange-500 to-red-500 h-2 rounded-full" style={{ width: '50%' }} />
+                  <div className="w-full bg-black/10 rounded-full h-2">
+                    <div className="bg-black h-2 rounded-full" style={{ width: '46%' }} />
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm font-medium text-black">Videos This Month</span>
+                    <span className="text-sm text-black/60">25 / 50</span>
+                  </div>
+                  <div className="w-full bg-black/10 rounded-full h-2">
+                    <div className="bg-black h-2 rounded-full" style={{ width: '50%' }} />
                   </div>
                 </div>
               </CardContent>
@@ -182,21 +181,21 @@ const Analytics = () => {
               <CardContent>
                 <div className="space-y-4">
                   {topVideos.map((video, index) => (
-                    <div key={video.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-purple-100 to-blue-100 rounded flex items-center justify-center">
-                        <Play className="w-4 h-4 text-purple-600" />
+                    <div key={video.id} className="flex items-start space-x-3 p-3 bg-black/5 rounded-lg">
+                      <div className="flex-shrink-0 w-8 h-8 bg-black/10 rounded flex items-center justify-center">
+                        <Play className="w-4 h-4 text-black" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">
+                        <p className="text-sm font-medium text-black truncate">
                           {video.title}
                         </p>
                         <div className="flex items-center space-x-2 mt-1">
                           <Badge variant="outline" className="text-xs">
                             {video.type}
                           </Badge>
-                          <span className="text-xs text-gray-500">{video.duration}</span>
+                          <span className="text-xs text-black/60">{video.duration}</span>
                         </div>
-                        <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
+                        <div className="flex items-center space-x-4 mt-2 text-xs text-black/60">
                           <span className="flex items-center">
                             <Eye className="w-3 h-3 mr-1" />
                             {video.views}
@@ -219,17 +218,17 @@ const Analytics = () => {
                 <CardTitle>Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <button className="w-full text-left p-3 rounded-lg border hover:bg-gray-50 transition-colors">
-                  <div className="text-sm font-medium">Export Analytics</div>
-                  <div className="text-xs text-gray-500">Download detailed reports</div>
+                <button className="w-full text-left p-3 rounded-lg border hover:bg-black/5 transition-colors">
+                  <div className="text-sm font-medium text-black">Export Analytics</div>
+                  <div className="text-xs text-black/60">Download detailed reports</div>
                 </button>
-                <button className="w-full text-left p-3 rounded-lg border hover:bg-gray-50 transition-colors">
-                  <div className="text-sm font-medium">Upgrade Plan</div>
-                  <div className="text-xs text-gray-500">Increase your limits</div>
+                <button className="w-full text-left p-3 rounded-lg border hover:bg-black/5 transition-colors">
+                  <div className="text-sm font-medium text-black">Upgrade Plan</div>
+                  <div className="text-xs text-black/60">Increase your limits</div>
                 </button>
-                <button className="w-full text-left p-3 rounded-lg border hover:bg-gray-50 transition-colors">
-                  <div className="text-sm font-medium">View Billing</div>
-                  <div className="text-xs text-gray-500">Manage subscription</div>
+                <button className="w-full text-left p-3 rounded-lg border hover:bg-black/5 transition-colors">
+                  <div className="text-sm font-medium text-black">View Billing</div>
+                  <div className="text-xs text-black/60">Manage subscription</div>
                 </button>
               </CardContent>
             </Card>

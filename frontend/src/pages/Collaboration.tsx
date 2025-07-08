@@ -48,21 +48,21 @@ const Collaboration = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "approved": return "bg-green-100 text-green-700";
-      case "in-review": return "bg-yellow-100 text-yellow-700";
-      case "pending": return "bg-gray-100 text-gray-700";
-      default: return "bg-gray-100 text-gray-700";
+      case "approved": return "bg-black text-white";
+      case "in-review": return "bg-black/10 text-black";
+      case "pending": return "bg-gray-100 text-black";
+      default: return "bg-gray-100 text-black";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className="bg-white border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-6 h-6 bg-gradient-to-r from-black to-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-6 h-6 bg-black rounded-lg flex items-center justify-center">
                 <HandshakeIcon className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold text-black">
@@ -82,8 +82,8 @@ const Collaboration = () => {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Team Collaboration</h1>
-          <p className="text-gray-600">Invite team members and collaborate on video projects</p>
+          <h1 className="text-3xl font-bold text-black mb-2">Team Collaboration</h1>
+          <p className="text-black/60">Invite team members and collaborate on video projects</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -108,7 +108,7 @@ const Collaboration = () => {
                     onChange={(e) => setInviteEmail(e.target.value)}
                     className="flex-1"
                   />
-                  <Button className="bg-gradient-to-r from-purple-600 to-blue-600">
+                  <Button>
                     <Mail className="w-4 h-4 mr-2" />
                     Send Invite
                   </Button>
@@ -127,7 +127,7 @@ const Collaboration = () => {
               <CardContent>
                 <div className="space-y-4">
                   {teamMembers.map((member) => (
-                    <div key={member.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div key={member.id} className="flex items-center justify-between p-4 bg-black/5 rounded-lg">
                       <div className="flex items-center space-x-4">
                         <Avatar>
                           <AvatarFallback>
@@ -135,8 +135,8 @@ const Collaboration = () => {
                           </AvatarFallback>
                         </Avatar>
                         <div>
-                          <p className="font-medium">{member.name}</p>
-                          <p className="text-sm text-gray-500">{member.email}</p>
+                          <p className="font-medium text-black">{member.name}</p>
+                          <p className="text-sm text-black/60">{member.email}</p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -144,7 +144,7 @@ const Collaboration = () => {
                         <Badge className={getStatusColor(member.status)}>
                           {member.status}
                         </Badge>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="outline" size="sm">
                           <Settings className="w-4 h-4" />
                         </Button>
                       </div>
@@ -165,14 +165,14 @@ const Collaboration = () => {
               <CardContent>
                 <div className="space-y-4">
                   {sharedProjects.map((project) => (
-                    <div key={project.id} className="p-4 bg-gray-50 rounded-lg">
+                    <div key={project.id} className="p-4 bg-black/5 rounded-lg">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold">{project.title}</h3>
+                        <h3 className="font-semibold text-black">{project.title}</h3>
                         <Badge className={getStatusColor(project.status)}>
                           {project.status}
                         </Badge>
                       </div>
-                      <div className="flex items-center justify-between text-sm text-gray-500">
+                      <div className="flex items-center justify-between text-sm text-black/60">
                         <div className="flex items-center space-x-4">
                           <span className="flex items-center">
                             <Users className="w-4 h-4 mr-1" />
@@ -205,27 +205,27 @@ const Collaboration = () => {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-black mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium">Project approved</p>
-                      <p className="text-xs text-gray-500">Jane approved "Marketing Campaign"</p>
-                      <p className="text-xs text-gray-400">2 hours ago</p>
+                      <p className="text-sm font-medium text-black">Project approved</p>
+                      <p className="text-xs text-black/60">Jane approved "Marketing Campaign"</p>
+                      <p className="text-xs text-black/40">2 hours ago</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <MessageSquare className="w-5 h-5 text-blue-600 mt-0.5" />
+                    <MessageSquare className="w-5 h-5 text-black mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium">New comment</p>
-                      <p className="text-xs text-gray-500">Mike left a comment on "Product Launch"</p>
-                      <p className="text-xs text-gray-400">4 hours ago</p>
+                      <p className="text-sm font-medium text-black">New comment</p>
+                      <p className="text-xs text-black/60">Mike left a comment on "Product Launch"</p>
+                      <p className="text-xs text-black/40">4 hours ago</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <UserPlus className="w-5 h-5 text-purple-600 mt-0.5" />
+                    <UserPlus className="w-5 h-5 text-black mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium">Member joined</p>
-                      <p className="text-xs text-gray-500">Mike Johnson joined the team</p>
-                      <p className="text-xs text-gray-400">1 day ago</p>
+                      <p className="text-sm font-medium text-black">Member joined</p>
+                      <p className="text-xs text-black/60">Mike Johnson joined the team</p>
+                      <p className="text-xs text-black/40">1 day ago</p>
                     </div>
                   </div>
                 </div>
@@ -239,15 +239,15 @@ const Collaboration = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Email notifications</span>
+                  <span className="text-sm text-black">Email notifications</span>
                   <Button variant="outline" size="sm">Configure</Button>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Default permissions</span>
+                  <span className="text-sm text-black">Default permissions</span>
                   <Button variant="outline" size="sm">Manage</Button>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm">Project templates</span>
+                  <span className="text-sm text-black">Project templates</span>
                   <Button variant="outline" size="sm">Create</Button>
                 </div>
               </CardContent>
