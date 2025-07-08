@@ -14,7 +14,7 @@ import {
   Clock, 
   Share2,
   Settings,
-  Mail
+  Mail,HandshakeIcon
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -62,10 +62,10 @@ const Collaboration = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                <Video className="w-5 h-5 text-white" />
+              <div className="w-6 h-6 bg-gradient-to-r from-black to-blue-600 rounded-lg flex items-center justify-center">
+                <HandshakeIcon className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-black bg-clip-text text-transparent">
                 VOXILABS
               </span>
             </Link>

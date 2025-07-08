@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, X, Star, Zap, Crown } from "lucide-react";
+import { Check, X, Star, Zap, Crown, IndianRupeeIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Pricing = () => {
@@ -84,10 +84,10 @@ const Pricing = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
+              <div className="w-6 h-6 bg-gradient-to-r from-black to-blue-600 rounded-lg flex items-center justify-center">
+                <IndianRupeeIcon className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-black bg-clip-text text-transparent">
                 VOXILABS
               </span>
             </Link>
