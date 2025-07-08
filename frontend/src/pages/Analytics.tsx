@@ -50,7 +50,7 @@ const Analytics = () => {
               <BarChart3 className="w-5 h-5 text-white" />
             </div>
 
-              <span className="text-xl font-bold text-black bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-black">
                 VOXILABS
               </span>
             </Link>

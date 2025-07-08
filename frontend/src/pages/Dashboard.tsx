@@ -77,7 +77,7 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-              <span className="text-xl font-bold text-black bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-black">
                 VOXILABS
               </span>
             </Link>

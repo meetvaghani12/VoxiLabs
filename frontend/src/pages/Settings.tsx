@@ -45,7 +45,7 @@ const Settings = () => {
               <div className="w-6 h-6 bg-gradient-to-r from-black to-blue-600 rounded-lg flex items-center justify-center">
                 <SettingsIcon className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-black bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-black">
                 VOXILABS
               </span>
             </Link>

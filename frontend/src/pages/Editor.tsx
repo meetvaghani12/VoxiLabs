@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,15 +17,23 @@ import {
   ArrowLeft,
   Save,
   Settings,
-  Volume2
+  Volume2,
+  Loader2
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
+import { Navigation } from "@/components/Navigation";
+
+const BACKEND_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const Editor = () => {
   const [script, setScript] = useState("");
   const [selectedVoice, setSelectedVoice] = useState("sarah");
   const [selectedAvatar, setSelectedAvatar] = useState("professional");
   const [selectedBackground, setSelectedBackground] = useState("office");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const voices = [
     { id: "sarah", name: "Sarah", language: "English (US)", accent: "Professional" },
@@ -49,221 +56,156 @@ const Editor = () => {
     { id: "nature", name: "Nature Scene", category: "Outdoor" }
   ];
 
+  const handleGenerate = async () => {
+    if (!script.trim()) {
+      toast.error("Please enter a script first");
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const response = await fetch(`${BACKEND_URL}/generate-video`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          prompt: script,
+          voice: selectedVoice,
+          avatar: selectedAvatar,
+          background: selectedBackground
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to generate video: ${response.status} ${response.statusText}`);
+      }
+
+      // Log response headers to debug content type
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+      
+      const contentType = response.headers.get('content-type');
+      console.log('Content-Type:', contentType);
+
+      const blob = await response.blob();
+      console.log('Blob size:', blob.size, 'bytes');
+      console.log('Blob type:', blob.type);
+
+      // Check for minimum valid video size (10KB)
+      if (blob.size < 10000) {
+        throw new Error(`Received invalid video data: file size too small (${blob.size} bytes). The server might have returned an error.`);
+      }
+
+      if (!contentType?.includes('video/')) {
+        throw new Error(`Invalid content type received: ${contentType}. Expected a video format.`);
+      }
+
+      // Create blob URL with explicit video MIME type if not set
+      const blobType = blob.type || 'video/mp4';
+      const videoBlob = new Blob([blob], { type: blobType });
+      const url = URL.createObjectURL(videoBlob);
+      
+      console.log('Created video URL:', url);
+      setVideoUrl(url);
+      
+      // Clean up previous video URL to prevent memory leaks
+      if (videoRef.current) {
+        videoRef.current.src = url;
+        videoRef.current.load(); // Force video element to load new source
+        
+        // Add event listeners to debug video loading
+        videoRef.current.onloadeddata = () => {
+          console.log('Video loaded successfully');
+        };
+        videoRef.current.onerror = (e) => {
+          console.error('Video loading error:', videoRef.current?.error);
+          toast.error('Error loading video: ' + videoRef.current?.error?.message);
+        };
+      }
+
+      toast.success("Video generated successfully!");
+    } catch (error) {
+      console.error('Generation error:', error);
+      toast.error(error instanceof Error ? error.message : "Failed to generate video. Please try again.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  // Clean up blob URLs when component unmounts
+  useEffect(() => {
+    return () => {
+      if (videoUrl) {
+        URL.revokeObjectURL(videoUrl);
+      }
+    };
+  }, [videoUrl]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
-      {/* Navigation */}
-      <nav className="bg-white border-b shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link to="/dashboard" className="flex items-center text-gray-600 hover:text-purple-600">
-                <ArrowLeft className="w-5 h-5 mr-2" />
-                Back
-              </Link>
-              <Separator orientation="vertical" className="h-6" />
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-black to-blue-600 rounded-lg flex items-center justify-center">
-                  <Video className="w-5 h-5 text-white" />
-                </div>
-                <span className="font-bold">Generate</span>
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm">
-                <Save className="w-4 h-4 mr-2" />
-                Save Draft
-              </Button>
-              <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                <Zap className="w-4 h-4 mr-2" />
-                Generate Video
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      <Navigation />
+      
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Editor Panel */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Script Editor */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Mic className="w-5 h-5 mr-2 text-purple-600" />
-                  Script Editor
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Script Editor */}
+          <Card className="border-0 shadow-lg">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold mb-4">Script Editor</h2>
+              <div className="space-y-4">
                 <Textarea
-                  placeholder="Enter your script here... The AI will automatically break it into scenes and generate matching visuals."
+                  placeholder="Enter your script here... (e.g., A young man walking on the street)"
                   value={script}
                   onChange={(e) => setScript(e.target.value)}
-                  className="min-h-[200px] text-base leading-relaxed"
+                  className="min-h-[200px] resize-none"
+                  disabled={isGenerating}
                 />
-                <div className="flex items-center justify-between mt-4 text-sm text-gray-500">
-                  <span>{script.length} characters</span>
-                  <span>~{Math.ceil(script.length / 150)} seconds video</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Scene Preview */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Play className="w-5 h-5 mr-2 text-purple-600" />
-                  Preview
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="aspect-video bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg flex items-center justify-center border-2 border-dashed border-purple-300">
-                  <div className="text-center">
-                    <Play className="w-16 h-16 text-purple-600 mx-auto mb-4" />
-                    <p className="text-lg text-gray-600 mb-2">AI Video Preview</p>
-                    <p className="text-sm text-gray-500">Enter your script and click preview to see the magic</p>
-                    <Button className="mt-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                      <Play className="w-4 h-4 mr-2" />
-                      Generate Preview
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Settings Panel */}
-          <div className="space-y-6">
-            {/* Voice Settings */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center text-lg">
-                  <Volume2 className="w-5 h-5 mr-2 text-purple-600" />
-                  Voice Settings
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Tabs defaultValue="voices" className="w-full">
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="voices">AI Voices</TabsTrigger>
-                    <TabsTrigger value="clone">Clone Voice</TabsTrigger>
-                  </TabsList>
-                  
-                  <TabsContent value="voices" className="space-y-3 mt-4">
-                    {voices.map((voice) => (
-                      <div
-                        key={voice.id}
-                        className={`p-3 rounded-lg border cursor-pointer transition-all ${
-                          selectedVoice === voice.id 
-                            ? "border-purple-500 bg-purple-50" 
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                        onClick={() => setSelectedVoice(voice.id)}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="font-medium">{voice.name}</p>
-                            <p className="text-sm text-gray-500">{voice.language}</p>
-                          </div>
-                          <Badge variant="outline">{voice.accent}</Badge>
-                        </div>
-                      </div>
-                    ))}
-                  </TabsContent>
-                  
-                  <TabsContent value="clone" className="mt-4">
-                    <div className="text-center p-6 border-2 border-dashed border-gray-300 rounded-lg">
-                      <Mic className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                      <p className="text-sm text-gray-600 mb-4">Upload audio sample to clone your voice</p>
-                      <Button variant="outline" size="sm">
-                        Upload Audio
-                      </Button>
-                    </div>
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
-            </Card>
-
-            {/* Avatar Settings */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center text-lg">
-                  <User className="w-5 h-5 mr-2 text-purple-600" />
-                  Avatar
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {avatars.map((avatar) => (
-                  <div
-                    key={avatar.id}
-                    className={`p-3 rounded-lg border cursor-pointer transition-all ${
-                      selectedAvatar === avatar.id 
-                        ? "border-purple-500 bg-purple-50" 
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => setSelectedAvatar(avatar.id)}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">{avatar.name}</p>
-                        <p className="text-sm text-gray-500">{avatar.style}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Background Settings */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center text-lg">
-                  <Image className="w-5 h-5 mr-2 text-purple-600" />
-                  Background
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {backgrounds.map((bg) => (
-                  <div
-                    key={bg.id}
-                    className={`p-3 rounded-lg border cursor-pointer transition-all ${
-                      selectedBackground === bg.id 
-                        ? "border-purple-500 bg-purple-50" 
-                        : "border-gray-200 hover:border-gray-300"
-                    }`}
-                    onClick={() => setSelectedBackground(bg.id)}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">{bg.name}</p>
-                        <p className="text-sm text-gray-500">{bg.category}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Action Buttons */}
-            <div className="space-y-3">
-              <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-lg py-6">
-                <Zap className="w-5 h-5 mr-2" />
-                Generate Final Video
-              </Button>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <Button variant="outline">
-                  <Download className="w-4 h-4 mr-2" />
-                  Download
-                </Button>
-                <Button variant="outline">
-                  <Share className="w-4 h-4 mr-2" />
-                  Share
+                <Button 
+                  className="w-full"
+                  onClick={handleGenerate}
+                  disabled={isGenerating}
+                >
+                  {isGenerating ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Generating Video...
+                    </>
+                  ) : (
+                    'Generate Video'
+                  )}
                 </Button>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
+
+          {/* Video Preview */}
+          <Card className="border-0 shadow-lg">
+            <CardContent className="p-6">
+              <h2 className="text-2xl font-bold mb-4">Preview</h2>
+              <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden">
+                {videoUrl ? (
+                  <video
+                    ref={videoRef}
+                    src={videoUrl}
+                    controls
+                    className="w-full h-full object-contain"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-500">
+                    {isGenerating ? (
+                      <div className="flex flex-col items-center">
+                        <Loader2 className="h-8 w-8 animate-spin mb-2" />
+                        <p>Generating your video...</p>
+                      </div>
+                    ) : (
+                      <p>Your video preview will appear here</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
