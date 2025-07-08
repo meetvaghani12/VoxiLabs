@@ -34,7 +34,7 @@ export const sendVerificationEmail = async (
         </div>
         <p>If you didn't request a password reset, please ignore this email or contact support if you have concerns.</p>
         <p>This link will expire in 1 hour.</p>
-        <p>Best regards,<br>The Property Marketplace Team</p>
+        <p>Best regards,<br>The VoxiLabs Team</p>
       </div>
     `;
   } else if (isLogin) {
@@ -49,14 +49,14 @@ export const sendVerificationEmail = async (
         </div>
         <p>This code will expire in 10 minutes.</p>
         <p>If you didn't attempt to log in, please secure your account by changing your password immediately.</p>
-        <p>Best regards,<br>The Property Marketplace Team</p>
+        <p>Best regards,<br>The VoxiLabs Team</p>
       </div>
     `;
   } else {
     subject = 'Verify Your Email Address';
     htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
-        <h2 style="color: #333;">Welcome to Property Marketplace!</h2>
+        <h2 style="color: #333;">Welcome to VoxiLabs!</h2>
         <p>Hello ${firstName},</p>
         <p>Thank you for registering. To complete your registration, please verify your email address using the verification code below:</p>
         <div style="text-align: center; margin: 30px 0;">
@@ -64,13 +64,13 @@ export const sendVerificationEmail = async (
         </div>
         <p>This code will expire in 10 minutes.</p>
         <p>If you didn't create an account, please ignore this email.</p>
-        <p>Best regards,<br>The Property Marketplace Team</p>
+        <p>Best regards,<br>The VoxiLabs Team</p>
       </div>
     `;
   }
   
   const mailOptions = {
-    from: `"Property Marketplace" <${process.env.SMTP_USER}>`,
+    from: `"VoxiLabs" <${process.env.SMTP_USER}>`,
     to: email,
     subject,
     html: htmlContent,

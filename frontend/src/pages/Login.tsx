@@ -8,6 +8,12 @@ import { Mail } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "@/services/auth";
 import { toast } from "sonner";
+import { AxiosError } from "axios";
+
+interface ErrorResponse {
+  message: string;
+  email?: string;
+}
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,8 +29,20 @@ const Login = () => {
       await authService.login({ email, password });
       toast.success("Login successful!");
       navigate("/dashboard");
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "Failed to login");
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.data) {
+        const errorData = error.response.data as ErrorResponse;
+        const isUnverifiedEmail = errorData.message?.includes('Email not verified');
+        
+        if (isUnverifiedEmail && errorData.email) {
+          toast.info("Please verify your email to continue");
+          navigate('/verify-email', { state: { email: errorData.email } });
+        } else {
+          toast.error(errorData.message || "Failed to login");
+        }
+      } else {
+        toast.error("Failed to login");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -34,8 +52,12 @@ const Login = () => {
     try {
       const authUrl = await authService.initiateGoogleAuth();
       window.location.href = authUrl;
-    } catch (error: any) {
-      toast.error("Failed to initiate Google login");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data?.message || "Failed to initiate Google login");
+      } else {
+        toast.error("Failed to initiate Google login");
+      }
     }
   };
 
