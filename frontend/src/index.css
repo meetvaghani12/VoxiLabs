@@ -1,0 +1,279 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ElevenLabs-inspired design system with professional color palette */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 210 40% 98%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 257 69% 47%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 45 93% 47%;
+    --secondary-foreground: 240 10% 3.9%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 257 69% 47%;
+
+    --radius: 0.75rem;
+
+    /* ElevenLabs specific colors */
+    --primary-purple: 257 69% 47%;
+    --accent-yellow: 45 93% 47%;
+    --text-primary: 240 10% 3.9%;
+    --text-secondary: 240 5% 42%;
+    --surface-light: 210 40% 98%;
+  }
+
+  .dark {
+    --background: 240 10% 5.5%;
+    --foreground: 0 0% 100%;
+
+    --card: 240 4% 11%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 240 10% 5.5%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 262 75% 74%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 4% 15.9%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 4% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 4% 15.9%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 4% 17.5%;
+    --input: 240 4% 17.5%;
+    --ring: 262 75% 74%;
+
+    /* Dark mode specific colors */
+    --primary-purple: 262 75% 74%;
+    --text-secondary: 240 5% 64.9%;
+    --surface-dark: 240 4% 11%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Typography System */
+  h1 {
+    @apply text-4xl font-bold leading-tight tracking-wide;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold leading-tight tracking-wide;
+  }
+
+  h3 {
+    @apply text-xl font-semibold leading-normal;
+  }
+
+  p {
+    @apply text-base leading-relaxed tracking-wide;
+  }
+
+  .caption {
+    @apply text-sm leading-normal tracking-wide;
+  }
+}
+
+/* Custom Components */
+@layer components {
+  /* Primary Button - ElevenLabs Style */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 
+           rounded-full px-6 py-3 text-sm font-medium
+           bg-primary text-primary-foreground
+           transition-all duration-200 ease-in-out
+           hover:bg-primary/90 hover:scale-[1.02]
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-full px-6 py-3 text-sm font-medium
+           border border-primary text-primary bg-transparent
+           transition-all duration-200 ease-in-out
+           hover:bg-primary/5 hover:scale-[1.02]
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  /* Input Fields */
+  .input-field {
+    @apply flex h-12 w-full rounded-xl border border-input 
+           bg-background px-4 py-3 text-base
+           placeholder:text-muted-foreground
+           focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
+           disabled:cursor-not-allowed disabled:opacity-50
+           transition-all duration-200;
+  }
+
+  /* Card Design */
+  .card-elevated {
+    @apply bg-card rounded-2xl p-6 shadow-sm border border-border
+           transition-all duration-200 ease-in-out
+           hover:shadow-md hover:scale-[1.01];
+  }
+
+  /* Project Card */
+  .project-card {
+    @apply bg-card rounded-2xl p-5 shadow-sm border border-border
+           transition-all duration-300 ease-in-out
+           hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1
+           cursor-pointer group;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply px-4 py-2 rounded-lg text-sm font-medium
+           text-muted-foreground hover:text-foreground
+           transition-colors duration-200;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  /* Glass Effect */
+  .glass-effect {
+    @apply backdrop-blur-sm bg-background/80 border border-border/50;
+  }
+}
+
+/* Custom animations and utilities */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    @apply h-2 bg-muted rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full bg-gradient-to-r from-primary to-secondary transition-all duration-300;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary)/0.8);
+}
+
+/* Selection styling */
+::selection {
+  background: hsl(var(--primary)/0.2);
+  color: hsl(var(--foreground));
+}
