@@ -127,7 +127,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     // Create session and return token
     const token = generateToken({
-      id: user.id,
+      userId: user.id,  // Changed from id to userId
       email: user.email,
     });
 
@@ -199,7 +199,7 @@ export const verifyLoginOTP = async (req: Request, res: Response): Promise<void>
 
     // Generate JWT token
     const token = generateToken({
-      id: user.id,
+      userId: user.id,  // Changed from id to userId
       email: user.email,
     });
 

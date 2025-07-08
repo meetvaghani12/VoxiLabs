@@ -23,6 +23,7 @@ model User {
   // Relations
   sessions          Session[]
   accounts          Account[]
+  videos            Video[]   // Add relation to videos
 }
 
 model Session {
@@ -57,4 +58,19 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+
+model Video {
+  id          String   @id @default(cuid())
+  title       String
+  prompt      String   @db.Text
+  status      String   // completed, processing, failed
+  url         String?  // URL to stored video
+  duration    Float?   // Duration in seconds
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
 }

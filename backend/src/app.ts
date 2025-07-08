@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import path from 'path';
 import authRoutes from './auth/routes/auth-routes';
 import videoRoutes from './routes/video-routes';
 import { errorHandler } from './middleware/error-handler';
@@ -39,6 +40,9 @@ app.use(morgan('dev'));
 // Increase limit for JSON and URL-encoded data
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+
+// Serve static files from public directory
+app.use('/videos', express.static(path.join(__dirname, '../public/videos')));
 
 // Routes
 app.use('/api/auth', authRoutes);

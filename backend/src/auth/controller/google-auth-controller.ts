@@ -73,7 +73,7 @@ export const handleGoogleCallback = async (req: Request, res: Response): Promise
 
     // Generate JWT token
     const token = generateToken({
-      id: user.id,
+      userId: user.id,  // Changed from id to userId
       email: user.email,
     });
     

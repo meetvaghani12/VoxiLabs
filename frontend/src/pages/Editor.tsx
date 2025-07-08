@@ -64,10 +64,18 @@ const Editor = () => {
 
     setIsGenerating(true);
     try {
+      // Get the token from localStorage
+      const token = localStorage.getItem('token');
+      
+      if (!token) {
+        throw new Error('You must be logged in to generate videos');
+      }
+
       const response = await fetch(`${BACKEND_URL}/generate-video`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ 
           prompt: script,
@@ -78,6 +86,10 @@ const Editor = () => {
       });
 
       if (!response.ok) {
+        if (response.status === 401) {
+          // Handle unauthorized error specifically
+          throw new Error('Your session has expired. Please log in again.');
+        }
         throw new Error(`Failed to generate video: ${response.status} ${response.statusText}`);
       }
 
