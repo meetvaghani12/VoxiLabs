@@ -10,13 +10,7 @@ VOXILABS is a cutting-edge AI-powered platform that transforms text into profess
 - Support for multiple video formats (MP4, GIF, WebM)
 - 4K resolution export capability
 - Custom video duration settings
-
-### Voice and Audio
-- 100+ realistic AI voices in 50+ languages (powered by ElevenLabs)
-- Voice cloning capabilities
-- Custom voice creation from audio samples
-- Perfect lip-sync with generated videos
-
+  
 ### User Management
 - Secure authentication system
   - Email/Password login
@@ -51,7 +45,6 @@ VOXILABS is a cutting-edge AI-powered platform that transforms text into profess
 ### Additional Features
 - Responsive design (mobile-friendly)
 - Dark/Light theme support
-- Real-time notifications
 - Export capabilities
 - Billing and subscription management
 
@@ -128,7 +121,7 @@ VOXILABS is a cutting-edge AI-powered platform that transforms text into profess
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/voxilabs.git
+git clone https://github.com/meetvaghani12/voxilabs.git
 cd voxilabs
 ```
 
@@ -172,9 +165,7 @@ cd frontend
 npm run dev
 ```
 
-## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
@@ -182,4 +173,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📧 Contact
 
-For any questions or concerns, please contact us at support@voxilabs.com 
+For any questions or concerns, please contact us at meetvaghani1238@gmail.com
