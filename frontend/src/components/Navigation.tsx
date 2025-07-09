@@ -40,9 +40,6 @@ export const Navigation = () => {
       <div className="flex items-center space-x-4">
         {isAuthenticated ? (
           <>
-            <Link to="/dashboard">
-              <Button variant="ghost">Dashboard</Button>
-            </Link>
             <Link to="/editor">
               <Button>Generate</Button>
             </Link>

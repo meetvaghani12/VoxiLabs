@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { 
   Video, 
   Clock, 
@@ -10,7 +11,8 @@ import {
   Eye, 
   Share2,
   Play,
-  BarChart3
+  BarChart3,
+  LayoutDashboard
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -56,7 +58,10 @@ const Analytics = () => {
             
             <div className="flex items-center space-x-4">
               <Link to="/dashboard">
-                <button className="px-4 py-2 text-black hover:text-black/80">Dashboard</button>
+                <Button className="bg-black text-white hover:bg-gray-800 flex items-center gap-2">
+                  <LayoutDashboard className="w-4 h-4" />
+                  Dashboard
+                </Button>
               </Link>
             </div>
           </div>

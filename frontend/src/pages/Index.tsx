@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Play, Zap, Globe, Mic, Video, Users, Star } from "lucide-react";
+import { ArrowRight, Play, Zap, Globe, Mic, Video, Users, Star, LayoutDashboard } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { useEffect, useState } from "react";
@@ -32,6 +32,14 @@ const Index = () => {
     }
   };
 
+  const handleDashboardClick = () => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    } else {
+      navigate('/login', { state: { from: '/dashboard' } });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white font-manrope">
       {/* Navigation */}
@@ -52,8 +60,14 @@ const Index = () => {
           <Button size="lg" className="text-lg px-8 py-6 bg-black text-white hover:bg-gray-800" onClick={handleGetStarted}>
             {isAuthenticated ? 'Start Creating' : 'Start Creating Free'}
           </Button>
-          <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-2 border-black text-black hover:bg-gray-100">
-            Watch Demo
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="text-lg px-8 py-6 border-2 border-black text-black hover:bg-gray-100 flex items-center gap-2"
+            onClick={handleDashboardClick}
+          >
+            <LayoutDashboard className="w-5 h-5" />
+            {isAuthenticated ? 'Go to Dashboard' : 'View Dashboard'}
           </Button>
         </div>
       </section>
@@ -208,7 +222,7 @@ const Index = () => {
                     I
                   </div>
                   <div className="ml-3">
-                    <p className="font-semibold text-black font-sora">Isha Dungrani</p>
+                    <p className="font-semibold text-black font-sora">Akshay Vaghani</p>
                     <p className="text-sm text-gray-500">Marketing Director</p>
                   </div>
                 </div>

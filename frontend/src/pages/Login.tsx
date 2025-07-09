@@ -123,13 +123,13 @@ const Login = () => {
               />
             </div>
             <div className="flex justify-end">
-              <Link to="/forgot-password" className="text-sm text-purple-600 hover:underline">
+              <Link to="/forgot-password" className="text-sm text-black hover:underline">
                 Forgot password?
               </Link>
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              className="w-full bg-black text-white hover:bg-gray-800"
               disabled={isLoading}
             >
               {isLoading ? "Signing in..." : "Sign In"}
