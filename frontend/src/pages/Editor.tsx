@@ -157,28 +157,28 @@ const Editor = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
       <Navigation />
       
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
           {/* Text To Video */}
           <Card className="border-0 shadow-lg">
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-bold mb-4">Text To Video</h2>
-              <div className="space-y-4">
+            <CardContent className="p-4 sm:p-6">
+              <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Text To Video</h2>
+              <div className="space-y-3 sm:space-y-4">
                 <Textarea
                   placeholder="Enter your script here... (e.g., A young man walking on the street)"
                   value={script}
                   onChange={(e) => setScript(e.target.value)}
-                  className="min-h-[200px] resize-none"
+                  className="min-h-[150px] sm:min-h-[200px] resize-none text-sm sm:text-base"
                   disabled={isGenerating}
                 />
                 <Button 
-                  className="w-full"
+                  className="w-full text-sm sm:text-base"
                   onClick={handleGenerate}
                   disabled={isGenerating}
                 >
                   {isGenerating ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader2 className="mr-2 h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
                       Generating Video...
                     </>
                   ) : (
@@ -191,28 +191,19 @@ const Editor = () => {
 
           {/* Video Preview */}
           <Card className="border-0 shadow-lg">
-            <CardContent className="p-6">
-              <h2 className="text-2xl font-bold mb-4">Preview</h2>
-              <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden">
+            <CardContent className="p-4 sm:p-6">
+              <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Preview</h2>
+              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
                 {videoUrl ? (
                   <video
-                    ref={videoRef}
                     src={videoUrl}
                     controls
-                    className="w-full h-full object-contain"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+                    className="w-full h-full rounded-lg"
+                  />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-500">
-                    {isGenerating ? (
-                      <div className="flex flex-col items-center">
-                        <Loader2 className="h-8 w-8 animate-spin mb-2" />
-                        <p>Generating your video...</p>
-                      </div>
-                    ) : (
-                      <p>Your video preview will appear here</p>
-                    )}
+                  <div className="text-center p-4">
+                    <Play className="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 text-gray-400" />
+                    <p className="text-gray-500 text-sm sm:text-base">Video preview will appear here</p>
                   </div>
                 )}
               </div>

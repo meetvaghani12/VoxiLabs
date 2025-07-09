@@ -151,12 +151,12 @@ const Dashboard = () => {
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-sm bg-black">
+          <Card className="border-0 shadow-sm">
             <CardContent className="p-6">
               <Link to="/editor" className="block">
-                <div className="flex items-center justify-between text-white">
+                <div className="flex items-center justify-between text-black">
                   <div>
-                    <p className="text-sm text-white/60">New Project</p>
+                    <p className="text-sm text-black/60">New Project</p>
                     <p className="text-lg font-semibold">Create Video</p>
                   </div>
                   <Plus className="w-8 h-8" />

@@ -57,16 +57,20 @@ const Index = () => {
           Turn your ideas into videos with nothing but text. Our AI platform transforms your words into polished video content — no hassle, no tools.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button size="lg" className="text-lg px-8 py-6 bg-black text-white hover:bg-gray-800" onClick={handleGetStarted}>
+          <Button 
+            size="lg" 
+            className="text-base px-6 py-4 bg-black text-white hover:bg-gray-800" 
+            onClick={handleGetStarted}
+          >
             {isAuthenticated ? 'Start Creating' : 'Start Creating Free'}
           </Button>
           <Button 
             size="lg" 
             variant="outline" 
-            className="text-lg px-8 py-6 border-2 border-black text-black hover:bg-gray-100 flex items-center gap-2"
+            className="text-base px-6 py-4 border-2 border-black text-black hover:bg-gray-100 flex items-center gap-2"
             onClick={handleDashboardClick}
           >
-            <LayoutDashboard className="w-5 h-5" />
+            <LayoutDashboard className="w-4 h-4" />
             {isAuthenticated ? 'Go to Dashboard' : 'View Dashboard'}
           </Button>
         </div>
