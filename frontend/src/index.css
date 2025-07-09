@@ -87,29 +87,29 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-background text-foreground font-manrope;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
   /* Typography System */
   h1 {
-    @apply text-4xl font-bold leading-tight tracking-wide;
+    @apply text-4xl font-bold leading-tight tracking-wide font-sora;
   }
 
   h2 {
-    @apply text-2xl font-semibold leading-tight tracking-wide;
+    @apply text-2xl font-semibold leading-tight tracking-wide font-sora;
   }
 
   h3 {
-    @apply text-xl font-semibold leading-normal;
+    @apply text-xl font-semibold leading-normal font-sora;
   }
 
   p {
-    @apply text-base leading-relaxed tracking-wide;
+    @apply text-base leading-relaxed tracking-wide font-manrope;
   }
 
   .caption {
-    @apply text-sm leading-normal tracking-wide;
+    @apply text-sm leading-normal tracking-wide font-manrope;
   }
 }
 

@@ -159,10 +159,10 @@ const Editor = () => {
       
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Script Editor */}
+          {/* Text To Video */}
           <Card className="border-0 shadow-lg">
             <CardContent className="p-6">
-              <h2 className="text-2xl font-bold mb-4">Script Editor</h2>
+              <h2 className="text-2xl font-bold mb-4">Text To Video</h2>
               <div className="space-y-4">
                 <Textarea
                   placeholder="Enter your script here... (e.g., A young man walking on the street)"

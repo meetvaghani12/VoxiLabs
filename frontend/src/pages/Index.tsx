@@ -33,27 +33,26 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
+    <div className="min-h-screen bg-white font-manrope">
       {/* Navigation */}
       <Navigation />
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-20 text-center">
-        <Badge className="mb-6 bg-purple-100 text-purple-700 hover:bg-purple-100">
-         Now with AI Voice Cloning
+        <Badge className="mb-6 bg-black text-white hover:bg-gray-800 font-manrope">
+         Now with Instant Text-to-Video Magic
         </Badge>
-        <h1 className="text-2xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-purple-900 to-blue-900 bg-clip-text text-transparent leading-tight">
+        <h1 className="text-2xl md:text-6xl font-bold mb-6 text-black leading-tight font-sora">
           The most realistic Text to Video AI
         </h1>
         <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-          Create stunning AI-powered videos from text with realistic voices, lip-sync avatars, 
-          and animated characters. No video editing skills required.
+          Turn your ideas into videos with nothing but text. Our AI platform transforms your words into polished video content — no hassle, no tools.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button size="lg" className="text-lg px-8 py-6" onClick={handleGetStarted}>
+          <Button size="lg" className="text-lg px-8 py-6 bg-black text-white hover:bg-gray-800" onClick={handleGetStarted}>
             {isAuthenticated ? 'Start Creating' : 'Start Creating Free'}
           </Button>
-          <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-2">
+          <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-2 border-black text-black hover:bg-gray-100">
             Watch Demo
           </Button>
         </div>
@@ -62,78 +61,78 @@ const Index = () => {
       {/* Features Section */}
       <section className="max-w-7xl mx-auto px-6 py-20">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Powerful AI Features</h2>
+          <h2 className="text-4xl font-bold mb-4 text-black font-sora">Powerful AI Features</h2>
           <p className="text-xl text-gray-600">Everything you need to create professional videos</p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className="border border-black shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                 <Zap className="w-6 h-6 text-white" />
               </div>
-              <CardTitle>Text to Video</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-black font-sora">Text to Video</CardTitle>
+              <CardDescription className="text-gray-600">
                 Transform any text script into engaging videos with AI-generated scenes and animations
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className="border border-black shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                 <Globe className="w-6 h-6 text-white" />
               </div>
-              <CardTitle>Multilingual Voices</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-black font-sora">Multilingual Voices</CardTitle>
+              <CardDescription className="text-gray-600">
                 100+ realistic AI voices in 50+ languages powered by ElevenLabs technology
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className="border border-black shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                 <Mic className="w-6 h-6 text-white" />
               </div>
-              <CardTitle>Voice Cloning</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-black font-sora">Voice Cloning</CardTitle>
+              <CardDescription className="text-gray-600">
                 Clone your own voice or create custom AI voices with just a few audio samples
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className="border border-black shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                 <Video className="w-6 h-6 text-white" />
               </div>
-              <CardTitle>Lip-Sync Avatars</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-black font-sora">Lip-Sync Avatars</CardTitle>
+              <CardDescription className="text-gray-600">
                 Photorealistic avatars with perfect lip-sync matching your chosen voice
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className="border border-black shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                 <Users className="w-6 h-6 text-white" />
               </div>
-              <CardTitle>Team Collaboration</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-black font-sora">Team Collaboration</CardTitle>
+              <CardDescription className="text-gray-600">
                 Share projects, get feedback, and collaborate with your team in real-time
               </CardDescription>
             </CardHeader>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <Card className="border border-black shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <CardHeader>
-              <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4">
                 <Star className="w-6 h-6 text-white" />
               </div>
-              <CardTitle>Professional Quality</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-black font-sora">Professional Quality</CardTitle>
+              <CardDescription className="text-gray-600">
                 Export in 4K resolution with multiple formats: MP4, GIF, WebM
               </CardDescription>
             </CardHeader>
@@ -145,71 +144,71 @@ const Index = () => {
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Loved by creators worldwide</h2>
+            <h2 className="text-4xl font-bold mb-4 text-black font-sora">Loved by creators worldwide</h2>
             <p className="text-xl text-gray-600">Join thousands of content creators, educators, and marketers</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-black shadow-lg">
               <CardContent className="p-8">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-5 h-5 text-black fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6">
+                <p className="text-gray-600 mb-6">
                   "VOXILABS has revolutionized my content creation process. I can now create professional videos in minutes instead of hours."
                 </p>
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full flex items-center justify-center text-white font-bold">
-                    S
+                  <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-bold font-sora">
+                    H
                   </div>
                   <div className="ml-3">
-                    <p className="font-semibold">Sarah Chen</p>
+                    <p className="font-semibold text-black font-sora">Hetvi Vaghasiya</p>
                     <p className="text-sm text-gray-500">YouTuber, 2M subscribers</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-black shadow-lg">
               <CardContent className="p-8">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-5 h-5 text-black fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6">
+                <p className="text-gray-600 mb-6">
                   "The multilingual support is incredible. I can create educational content for students around the world."
                 </p>
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-teal-400 rounded-full flex items-center justify-center text-white font-bold">
-                    M
+                  <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-bold font-sora">
+                    Y
                   </div>
                   <div className="ml-3">
-                    <p className="font-semibold">Marcus Johnson</p>
+                    <p className="font-semibold text-black font-sora">Yash Nathani</p>
                     <p className="text-sm text-gray-500">Online Educator</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg">
+            <Card className="border border-black shadow-lg">
               <CardContent className="p-8">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-5 h-5 text-black fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6">
-                  "Our marketing campaigns have never looked better. The AI avatars are incredibly realistic."
+                <p className="text-gray-600 mb-6">
+                  "Voice cloning feature is a game-changer. My brand's voice is now consistent across all videos."
                 </p>
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-r from-pink-400 to-red-400 rounded-full flex items-center justify-center text-white font-bold">
-                    E
+                  <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-bold font-sora">
+                    I
                   </div>
                   <div className="ml-3">
-                    <p className="font-semibold">Emily Rodriguez</p>
+                    <p className="font-semibold text-black font-sora">Isha Dungrani</p>
                     <p className="text-sm text-gray-500">Marketing Director</p>
                   </div>
                 </div>
@@ -219,39 +218,21 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-blue-600 py-20">
-        <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to create your first AI video?
-          </h2>
-          <p className="text-xl text-purple-100 mb-8">
-            Join thousands of creators and start making professional videos today
-          </p>
-          <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8 py-6">
-            Start Free Trial
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                  <Video className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold">VOXILABS</span>
+                
+                <span className="text-xl font-bold font-sora">VOXILABS</span>
               </div>
               <p className="text-gray-400">
                 Transform text into professional videos with AI
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Product</h4>
+              <h4 className="font-semibold mb-4 font-sora">Product</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>Features</li>
                 <li>Pricing</li>
@@ -260,7 +241,7 @@ const Index = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Company</h4>
+              <h4 className="font-semibold mb-4 font-sora">Company</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>About</li>
                 <li>Blog</li>
@@ -269,7 +250,7 @@ const Index = () => {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Support</h4>
+              <h4 className="font-semibold mb-4 font-sora">Support</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>Help Center</li>
                 <li>Community</li>
@@ -279,7 +260,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 VOXILABS. All rights reserved.</p>
+            <p>&copy; 2025 VOXILABS. All rights reserved.</p>
           </div>
         </div>
       </footer>

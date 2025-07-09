@@ -55,8 +55,9 @@ export default {
 				}
 			},
 			fontFamily: {
-				'inter': ['Inter', 'system-ui', 'sans-serif'],
-				'sans': ['Inter', 'system-ui', 'sans-serif']
+				'sora': ['Sora', 'system-ui', 'sans-serif'],
+				'manrope': ['Manrope', 'system-ui', 'sans-serif'],
+				'sans': ['Manrope', 'system-ui', 'sans-serif']
 			},
 			fontSize: {
 				'xs': ['0.8125rem', { lineHeight: '1.5', letterSpacing: '0.025rem' }],
